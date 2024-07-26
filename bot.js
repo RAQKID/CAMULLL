@@ -30,7 +30,8 @@ async function updateStatus() {
     try {
         const status = statuses[Math.floor(Math.random() * statuses.length)];
         await client.user.setPresence({
-            activities: [{ name: status.name, type: status.type, status: status.status }],
+            activities: [{ name: status.name, type: status.type }],
+            status: status.status, // Set the status here
         });
     } catch (error) {
         console.error('Error setting presence:', error);
