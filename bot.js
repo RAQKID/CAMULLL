@@ -1,7 +1,7 @@
 // index.js
 
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const express = require('express');
 
 // Initialize Express app
@@ -19,10 +19,10 @@ const client = new Client({
 
 // Array of statuses
 const statuses = [
-    'Playing with code',
-    'Watching the server',
-    'Listening to the community',
-    'Coding in JavaScript'
+    { name: 'with code', type: ActivityType.Playing, status: 'online' },
+    { name: 'the server', type: ActivityType.Watching, status: 'idle' },
+    { name: 'the community', type: ActivityType.Listening, status: 'dnd' },
+    { name: 'Coding in JavaScript', type: ActivityType.Playing, status: 'idle' }
 ];
 
 // Function to update status
@@ -30,8 +30,7 @@ async function updateStatus() {
     try {
         const status = statuses[Math.floor(Math.random() * statuses.length)];
         await client.user.setPresence({
-            activities: [{ name: status }],
-            status: 'online',
+            activities: [{ name: status.name, type: status.type, status: status.status }],
         });
     } catch (error) {
         console.error('Error setting presence:', error);
