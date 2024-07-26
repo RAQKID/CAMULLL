@@ -42,7 +42,7 @@ async function updateStatus() {
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     // Update status every 10 minutes
-    setInterval(updateStatus, 600000);
+    setInterval(updateStatus, 12);
     updateStatus(); // Set initial status
 });
 
